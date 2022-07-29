@@ -166,6 +166,15 @@ class CopilotAskCompletionsCommand(CopilotTextCommand):
         plugin.request_get_completions(self.view)
 
 
+class CopilotAskCompletionsCyclingCommand(CopilotTextCommand):
+    def run(self, _: sublime.Edit) -> None:
+        plugin = CopilotPlugin.from_view(self.view)
+        if not plugin:
+            return
+
+        plugin.request_get_completions_cycling(self.view)
+
+
 class CopilotAcceptPanelCompletionShimCommand(CopilotWindowCommand):
     def run(self, view_id: int, completion_index: int) -> None:
         view = find_view_by_id(view_id)
